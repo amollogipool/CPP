@@ -1,36 +1,43 @@
-#include<iostream>
+/*
+Friend Function
+Friend function is a special type of function, which declares inside the class. 
+Friend function can access the private, protected and public data of the class.
+A keyword friend is used before return type of the function declaration/prototype.
+*/
+/*C++ program to demonstrate example of friend function with class.*/
+#include <iostream>
+ 
 using namespace std;
-int y=100;
-class Test
+ 
+class Number
 {
-	int x;
-	public:
-		void getX(int y);
-		void showXX();
-	friend void showX(Test t2);
-		
+private:
+    int a;
+public:
+    void getNum(int x);
+    //declaration of friend function
+    friend void printNum(Number NUM);
+ 
+     
 };
-
-void Test::getX(int y)
+ 
+//class member function definitions
+void Number::getNum(int x)
 {
-	x=y;
+    a=x;
 }
-
-void Test::showXX()
-{  
-	cout<<"X is"<<x;
+ 
+//friend function definition, no need of class name with SRO (::)
+void printNum(Number NUM)
+{
+    cout << "Value of a (private data member of class Number): " << NUM.a;
+ 
 }
-	
-void showX(Test t2)
-{    
-	cout<<"Friend X is"<<++t2.x;
+ 
+int main()
+{
+    Number nObj; //Object declaration
+    nObj.getNum(1000);
+    printNum(nObj);
+    return 0;
 }
-
-int main() {
-	Test t;
-	t.getX(10);
-	t.showXX();
-    showX(t);
-	return 0;
-}
-
